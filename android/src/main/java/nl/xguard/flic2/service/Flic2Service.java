@@ -205,8 +205,8 @@ public class Flic2Service extends HeadlessJsTaskService implements IFlic2Service
       return new HeadlessJsTaskConfig(
         "Flic2BackgroundHandler",
         data,
-        5000, // timeout for the task
-        false // optional: defines whether or not  the task is allowed in foreground. Default is false
+        0, // timeout for the task
+        true // optional: defines whether or not  the task is allowed in foreground. Default is false
       );
     }
 }

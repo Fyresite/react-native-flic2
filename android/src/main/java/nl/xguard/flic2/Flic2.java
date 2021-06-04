@@ -82,6 +82,7 @@ public class Flic2 extends ReactContextBaseJavaModule implements LifecycleEventL
         boolean isRunning = isServiceRunning(context, Flic2Service.class);
         if (!isRunning) {
             Intent intent = new Intent(context, Flic2Service.class);
+            intent.putExtra("isReady", true);
             startForegroundService(context, intent);
         }
     }
