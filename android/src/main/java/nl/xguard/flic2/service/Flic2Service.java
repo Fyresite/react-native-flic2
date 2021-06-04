@@ -59,13 +59,6 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
     private BehaviorSubject<Boolean> mIsFlic2InitSubject = BehaviorSubject.create();
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
-        return Service.START_STICKY;
-
-    }
-
-    @Override
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate()");
@@ -154,7 +147,8 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
           this.startForegroundService();
         }
 
-        return super.onStartCommand(intent, flags, startId);
+        super.onStartCommand(intent, flags, startId);
+        return Service.START_STICKY;
     }
 
     private void setFlic2Init() {
