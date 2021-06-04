@@ -34,7 +34,7 @@ import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 import com.facebook.react.bridge.WritableMap;
 import javax.annotation.Nullable;
 
-public class Flic2Service extends HeadlessJsTaskService implements IFlic2Service {
+public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Service {
 
     private static final String TAG = Flic2Service.class.getSimpleName();
 
@@ -57,6 +57,13 @@ public class Flic2Service extends HeadlessJsTaskService implements IFlic2Service
     private boolean isServiceStarted = false;
 
     private BehaviorSubject<Boolean> mIsFlic2InitSubject = BehaviorSubject.create();
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+        return Service.START_STICKY;
+
+    }
 
     @Override
     public void onCreate() {
