@@ -28,8 +28,13 @@ import nl.xguard.flic2.R;
 import nl.xguard.flic2.model.ReactAndroidHandler;
 import nl.xguard.flic2.model.ReactLogger;
 
+import com.facebook.react.HeadlessJsTaskService;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.jstasks.HeadlessJsTaskConfig;
+import com.facebook.react.bridge.WritableMap;
+import javax.annotation.Nullable;
 
-public class Flic2Service extends Service implements IFlic2Service {
+public class Flic2Service extends HeadlessJsTaskService implements IFlic2Service {
 
     private static final String TAG = Flic2Service.class.getSimpleName();
 
@@ -191,6 +196,18 @@ public class Flic2Service extends Service implements IFlic2Service {
         stopForeground(true);
       }
 
+    }
+
+    @Override
+    protected @Nullable HeadlessJsTaskConfig getTaskConfig(Intent intent) {
+      Bundle extras = intent.getExtras();
+      WritableMap data = extras != null ? Arguments.fromBundle(extras) : null;
+      return new HeadlessJsTaskConfig(
+        "Flic2BackgroundHandler",
+        data,
+        5000, // timeout for the task
+        false // optional: defines whether or not  the task is allowed in foreground. Default is false
+      );
     }
 }
 

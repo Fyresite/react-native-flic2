@@ -129,6 +129,13 @@ public class ReactEvent implements IReactEvent {
                 .emit(event, null);
     }
 
+    public void sendEvent(String event, Object data) {
+        Log.d(TAG, "sendEvent() called with: event = [" + event + "]");
+
+        mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(event, data);
+    }
+
     private void send(String event, String value, String keyValue) {
         Log.d(TAG, "send() called with: event = [" + event + "], value = [" + value + "], keyValue = [" + keyValue + "]");
         WritableMap args = new WritableNativeMap();

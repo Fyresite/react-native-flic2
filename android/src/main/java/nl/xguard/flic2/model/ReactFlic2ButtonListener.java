@@ -79,11 +79,15 @@ public class ReactFlic2ButtonListener extends Flic2ButtonListener {
 
     @Override
     public void onButtonSingleOrDoubleClickOrHold(Flic2Button button, boolean wasQueued, boolean lastQueued, long timestamp, boolean isSingleClick, boolean isDoubleClick, boolean isHold) {
+        ReactEvent reactEvent = (ReactEvent) ReactEvent.getInstance();
         if (isSingleClick) {
+            reactEvent.sendEvent("onButtonEvent", ReactEvent.EVENT_BUTTON_SINGLE_CLICK);
             ReactEvent.getInstance().send(button, ReactEvent.EVENT_BUTTON_SINGLE_CLICK, wasQueued, timestamp);
         } else if (isHold) {
+            reactEvent.sendEvent("onButtonEvent", ReactEvent.EVENT_BUTTON_HOLD);
             ReactEvent.getInstance().send(button, ReactEvent.EVENT_BUTTON_HOLD, wasQueued, timestamp);
         } else {
+            reactEvent.sendEvent("onButtonEvent", ReactEvent.EVENT_BUTTON_DOUBLE_CLICK);
             ReactEvent.getInstance().send(button, ReactEvent.EVENT_BUTTON_DOUBLE_CLICK, wasQueued, timestamp);
         }
     }
