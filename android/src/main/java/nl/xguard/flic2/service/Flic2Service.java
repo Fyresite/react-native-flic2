@@ -171,6 +171,7 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
             if (!isRunning) {
                 intent.putExtra("isReady", true);
                 ActivityUtil.startForegroundService(context, intent);
+                Flic2HeadlessJsTaskService.acquireWakeLockNow(context);
             }
         }
     }
@@ -184,6 +185,7 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
             if (!isRunning) {
                 intent.putExtra("isReady", true);
                 startForegroundService(context, intent);
+                Flic2HeadlessJsTaskService.acquireWakeLockNow(context);
             }
         }
     }
