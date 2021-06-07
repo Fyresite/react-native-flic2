@@ -181,10 +181,10 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "UpdateReceiver()");
             // The Application class's onCreate has already been called at this point, which is what we want
-            boolean isRunning = isServiceRunning(context, Flic2Service.class);
+            boolean isRunning = ActivityUtil.isServiceRunning(context, Flic2Service.class);
             if (!isRunning) {
                 intent.putExtra("isReady", true);
-                startForegroundService(context, intent);
+                ActivityUtil.startForegroundService(context, intent);
                 Flic2HeadlessJsTaskService.acquireWakeLockNow(context);
             }
         }
