@@ -34,6 +34,8 @@ import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 import com.facebook.react.bridge.WritableMap;
 import javax.annotation.Nullable;
 
+import static nl.xguard.flic2.util.ActivityUtil;
+
 public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Service {
 
     private static final String TAG = Flic2Service.class.getSimpleName();
@@ -165,6 +167,11 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "BootUpReceiver()");
             // The Application class's onCreate has already been called at this point, which is what we want
+            boolean isRunning = ActivityUtil.isServiceRunning(context, Flic2Service.class);
+            if (!isRunning) {
+                intent.putExtra("isReady", true);
+                ActivityUtil.startForegroundService(context, intent);
+            }
         }
     }
 
@@ -173,6 +180,11 @@ public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Se
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "UpdateReceiver()");
             // The Application class's onCreate has already been called at this point, which is what we want
+            boolean isRunning = isServiceRunning(context, Flic2Service.class);
+            if (!isRunning) {
+                intent.putExtra("isReady", true);
+                startForegroundService(context, intent);
+            }
         }
     }
 
