@@ -34,7 +34,7 @@ import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 import com.facebook.react.bridge.WritableMap;
 import javax.annotation.Nullable;
 
-import static nl.xguard.flic2.util.ActivityUtil;
+import nl.xguard.flic2.util.ActivityUtil;
 
 public class Flic2Service extends Flic2HeadlessJsTaskService implements IFlic2Service {
 
